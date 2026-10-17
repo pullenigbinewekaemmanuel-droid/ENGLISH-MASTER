@@ -389,6 +389,33 @@ updateProgress();
 startQuiz();
 showPage("home");
 </script>
-</body>
+</body><script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    RecaptchaVerifier,
+    signInWithPhoneNumber
+  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCJ_bP1VxDyKqyUI5mc2nV_GqsGUrKHc5I",
+    authDomain: "english-master-ca7d6.firebaseapp.com",
+    projectId: "english-master-ca7d6",
+    storageBucket: "english-master-ca7d6.firebasestorage.app",
+    messagingSenderId: "24429789830",
+    appId: "1:24429789830:web:b2a297fa8cf525acec0707",
+    measurementId: "G-GP45KWGKMW"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Firebase is connected. We'll add the sign-up and login buttons next.
+  console.log("English Master Firebase connected!");
+</script>
 </html>
 
