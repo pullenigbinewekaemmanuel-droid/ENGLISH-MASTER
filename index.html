@@ -1,1 +1,394 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Master - Learn English</title>
+<style>
+:root {
+  --blue: #315cf5;
+  --dark: #18213b;
+  --bg: #f4f7ff;
+  --green: #159b69;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+}
+header {
+  background: white;
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 12px #17254a10;
+}
+.logo { font-size: 22px; font-weight: bold; color: var(--blue); }
+.points { background: #fff2cc; padding: 10px 14px; border-radius: 20px; }
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 15px;
+}
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: bold;
+}
+nav button { background: white; color: var(--dark); }
+nav button.active, .primary { background: var(--blue); color: white; }
+main { max-width: 1000px; margin: 20px auto; padding: 0 18px 50px; }
+.hero {
+  background: linear-gradient(120deg, #315cf5, #704cf6);
+  color: white;
+  border-radius: 22px;
+  padding: 35px;
+  margin-bottom: 25px;
+}
+.hero h1 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 12px; }
+.hero p { line-height: 1.6; }
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 23px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 20px #17254a08;
+}
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 15px; }
+.small-card { background: #f8f9ff; border-radius: 13px; padding: 18px; }
+h2 { margin-top: 0; }
+.muted { color: #68738d; line-height: 1.6; }
+.word { font-size: 23px; font-weight: bold; }
+.answer {
+  display: block; width: 100%; text-align: left; margin: 9px 0;
+  background: #f1f4ff; color: var(--dark);
+}
+.answer:hover { background: #e0e7ff; }
+.answer:disabled { cursor: default; }
+.correct { background: #d8f7e9 !important; color: #08663f; }
+.wrong { background: #ffe2e2 !important; color: #9d2222; }
+.feedback { font-weight: bold; min-height: 25px; margin: 15px 0; }
+.progress-bg { background: #e6eaf5; height: 12px; border-radius: 20px; overflow: hidden; }
+.progress-bar { background: var(--green); height: 100%; width: 0%; transition: width .3s; }
+.hidden { display: none !important; }
+footer { text-align: center; color: #68738d; padding: 25px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">📘 English Master</div>
+  <div class="points">⭐ Points: <span id="points">0</span></div>
+</header>
+
+<nav>
+  <button class="active" data-page="home">Home</button>
+  <button data-page="lessons">Lessons</button>
+  <button data-page="vocabulary">Vocabulary</button>
+  <button data-page="quiz">Quiz</button>
+  <button data-page="progress">My Progress</button>
+</nav>
+
+<main>
+<section id="home" class="page">
+  <div class="hero">
+    <h1>Improve your English! 🌍</h1>
+    <p>Learn new words, practise everyday English and test your knowledge. Start learning at your own pace.</p>
+    <button class="primary" onclick="showPage('lessons')">Start Learning →</button>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <h3>📚 English Lessons</h3>
+      <p class="muted">Learn useful English expressions.</p>
+      <button class="primary" onclick="showPage('lessons')">Open Lessons</button>
+    </div>
+    <div class="card">
+      <h3>🗣️ Pronunciation</h3>
+      <p class="muted">Listen to English spoken aloud.</p>
+      <button class="primary" onclick="speak('Hello! How are you today?')">Listen Now 🔊</button>
+    </div>
+    <div class="card">
+      <h3>🧠 English Quiz</h3>
+      <p class="muted">Answer questions and earn points.</p>
+      <button class="primary" onclick="showPage('quiz')">Take Quiz</button>
+    </div>
+  </div>
+</section>
+
+<section id="lessons" class="page hidden">
+  <div class="card">
+    <h2>📚 Beginner English Lessons</h2>
+    <div class="small-card">
+      <h3>Lesson 1: Greetings</h3>
+      <p>Hello! My name is Daniel.</p>
+      <p>What is your name?</p>
+      <p>Nice to meet you.</p>
+      <button onclick="speak('Hello! My name is Daniel. What is your name? Nice to meet you.')">🔊 Listen</button>
+    </div>
+    <div class="small-card" style="margin-top:12px">
+      <h3>Lesson 2: Everyday Expressions</h3>
+      <p>Good morning. — A morning greeting.</p>
+      <p>Thank you. — Showing gratitude.</p>
+      <p>Please. — A polite word when asking.</p>
+      <p>Excuse me. — Getting someone's attention politely.</p>
+      <button onclick="speak('Good morning. Thank you. Please. Excuse me.')">🔊 Listen</button>
+    </div>
+    <div class="small-card" style="margin-top:12px">
+      <h3>Lesson 3: Simple Sentences</h3>
+      <p>I am a student.</p>
+      <p>I live in Italy.</p>
+      <p>I like learning English.</p>
+      <button onclick="speak('I am a student. I live in Italy. I like learning English.')">🔊 Listen</button>
+    </div>
+    <button class="primary" onclick="completeLesson()">✓ Mark a lesson complete</button>
+  </div>
+</section>
+
+<section id="vocabulary" class="page hidden">
+  <div class="card">
+    <h2>📝 Everyday Vocabulary</h2>
+    <p class="muted">Learn a word and listen to its pronunciation.</p>
+    <div class="grid" id="words"></div>
+  </div>
+</section>
+
+<section id="quiz" class="page hidden">
+  <div class="card">
+    <h2>🧠 English Quiz</h2>
+    <p class="muted">Each correct answer earns 10 points.</p>
+    <div class="progress-bg"><div class="progress-bar" id="quizProgress"></div></div>
+    <p id="questionNumber"></p>
+    <h3 id="question"></h3>
+    <div id="answers"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+    <button id="nextBtn" class="primary hidden" onclick="nextQuestion()">Next Question →</button>
+    <button id="restartBtn" class="primary hidden" onclick="startQuiz()">Play Again ↻</button>
+  </div>
+</section>
+
+<section id="progress" class="page hidden">
+  <div class="card">
+    <h2>📈 My Progress</h2>
+    <h3>Total points: <span id="progressPoints">0</span></h3>
+    <p>Correct answers: <strong id="correctCount">0</strong></p>
+    <p>Lessons completed: <strong id="lessonCount">0</strong></p>
+    <p>Quiz questions answered: <strong id="answeredCount">0</strong></p>
+    <div class="progress-bg"><div class="progress-bar" id="overallProgress"></div></div>
+    <p class="muted" id="progressMessage">Start a lesson or quiz to track your progress!</p>
+    <button onclick="resetProgress()">Reset Progress</button>
+  </div>
+</section>
+</main>
+
+<footer>English Master © 2026 | Learn a little every day!</footer>
+
+<script>
+const vocabulary = [
+  ["Hello","A greeting"],
+  ["Friend","A person you like"],
+  ["School","A place to learn"],
+  ["Water","A drink we need"],
+  ["Happy","Feeling good"],
+  ["Beautiful","Pleasant to look at"],
+  ["Learn","To gain knowledge"],
+  ["Family","People related to you"],
+  ["Book","Something you read"],
+  ["Food","Something you eat"],
+  ["Thank you","Words showing gratitude"],
+  ["Welcome","A friendly greeting"]
+];
+
+const questions = [
+  {q:"What does 'Hello' mean?",a:["A greeting","A goodbye","A question"],correct:0},
+  {q:"Choose the correct sentence.",a:["I is happy.","I am happy.","I be happy."],correct:1},
+  {q:"What is the opposite of 'big'?",a:["Tall","Long","Small"],correct:2},
+  {q:"Complete: She ___ a student.",a:["am","is","are"],correct:1},
+  {q:"What does 'Thank you' express?",a:["Anger","Gratitude","Sadness"],correct:1},
+  {q:"Which greeting is used in the morning?",a:["Good night","Good morning","Goodbye"],correct:1},
+  {q:"Complete: They ___ my friends.",a:["is","am","are"],correct:2},
+  {q:"What is the plural of 'book'?",a:["Books","Bookes","Book"],correct:0},
+  {q:"Complete: I ___ in Italy.",a:["lives","live","living"],correct:1},
+  {q:"What is the opposite of 'happy'?",a:["Glad","Sad","Kind"],correct:1}
+];
+
+let points = Number(localStorage.getItem("em_points")) || 0;
+let correctCount = Number(localStorage.getItem("em_correct")) || 0;
+let lessonCount = Number(localStorage.getItem("em_lessons")) || 0;
+let answeredCount = Number(localStorage.getItem("em_answered")) || 0;
+let currentQuestion = 0;
+let quizScore = 0;
+let hasAnswered = false;
+
+function saveProgress() {
+  localStorage.setItem("em_points",points);
+  localStorage.setItem("em_correct",correctCount);
+  localStorage.setItem("em_lessons",lessonCount);
+  localStorage.setItem("em_answered",answeredCount);
+  updateProgress();
+}
+
+function updateProgress() {
+  document.getElementById("points").textContent = points;
+  document.getElementById("progressPoints").textContent = points;
+  document.getElementById("correctCount").textContent = correctCount;
+  document.getElementById("lessonCount").textContent = lessonCount;
+  document.getElementById("answeredCount").textContent = answeredCount;
+  document.getElementById("overallProgress").style.width =
+    Math.min(100,answeredCount/questions.length*100) + "%";
+  document.getElementById("progressMessage").textContent =
+    answeredCount === 0 && lessonCount === 0
+      ? "Start a lesson or quiz to track your progress!"
+      : "Great job! Keep practising to improve your English.";
+}
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
+  document.getElementById(page).classList.remove("hidden");
+  document.querySelectorAll("nav button").forEach(btn => {
+    btn.classList.toggle("active",btn.dataset.page === page);
+  });
+  if (page === "progress") updateProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click",() => showPage(btn.dataset.page));
+});
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("Speech is not supported in this browser.");
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "en-GB";
+  utterance.rate = 0.85;
+  window.speechSynthesis.speak(utterance);
+}
+
+function renderWords() {
+  const container = document.getElementById("words");
+  vocabulary.forEach(([word,meaning]) => {
+    const card = document.createElement("div");
+    card.className = "small-card";
+    const title = document.createElement("div");
+    title.className = "word";
+    title.textContent = word;
+    const description = document.createElement("p");
+    description.className = "muted";
+    description.textContent = meaning;
+    const button = document.createElement("button");
+    button.textContent = "🔊 Listen";
+    button.onclick = () => speak(word);
+    card.append(title,description,button);
+    container.appendChild(card);
+  });
+}
+
+function completeLesson() {
+  lessonCount++;
+  saveProgress();
+  alert("Lesson completed! Keep learning.");
+}
+
+function startQuiz() {
+  currentQuestion = 0;
+  quizScore = 0;
+  document.getElementById("restartBtn").classList.add("hidden");
+  showQuestion();
+}
+
+function showQuestion() {
+  hasAnswered = false;
+  const q = questions[currentQuestion];
+  document.getElementById("questionNumber").textContent =
+    `Question ${currentQuestion+1} of ${questions.length}`;
+  document.getElementById("question").textContent = q.q;
+  document.getElementById("quizProgress").style.width =
+    currentQuestion/questions.length*100 + "%";
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("nextBtn").classList.add("hidden");
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  q.a.forEach((answer,index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = answer;
+    button.onclick = () => checkAnswer(index,button);
+    answers.appendChild(button);
+  });
+}
+
+function checkAnswer(index,selectedButton) {
+  if (hasAnswered) return;
+  hasAnswered = true;
+  answeredCount++;
+  const q = questions[currentQuestion];
+  const buttons = document.querySelectorAll("#answers button");
+
+  buttons.forEach((button,i) => {
+    button.disabled = true;
+    if (i === q.correct) button.classList.add("correct");
+  });
+
+  if (index === q.correct) {
+    points += 10;
+    correctCount++;
+    quizScore += 10;
+    document.getElementById("feedback").textContent =
+      "Correct! Well done! +10 points 🎉";
+  } else {
+    selectedButton.classList.add("wrong");
+    document.getElementById("feedback").textContent =
+      "Not quite. The correct answer is: " + q.a[q.correct];
+  }
+
+  saveProgress();
+
+  if (currentQuestion < questions.length-1) {
+    document.getElementById("nextBtn").classList.remove("hidden");
+  } else {
+    document.getElementById("quizProgress").style.width = "100%";
+    document.getElementById("feedback").textContent +=
+      ` Quiz complete! You earned ${quizScore} points this round.`;
+    document.getElementById("restartBtn").classList.remove("hidden");
+  }
+}
+
+function nextQuestion() {
+  if (currentQuestion < questions.length-1) {
+    currentQuestion++;
+    showQuestion();
+  }
+}
+
+function resetProgress() {
+  if (!confirm("Reset all your points and progress?")) return;
+  points = 0;
+  correctCount = 0;
+  lessonCount = 0;
+  answeredCount = 0;
+  saveProgress();
+  alert("Your progress has been reset.");
+}
+
+renderWords();
+updateProgress();
+startQuiz();
+showPage("home");
+</script>
+</body>
+</html>
+
