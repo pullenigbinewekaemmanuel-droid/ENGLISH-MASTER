@@ -416,6 +416,67 @@ showPage("home");
 
   // Firebase is connected. We'll add the sign-up and login buttons next.
   console.log("English Master Firebase connected!");
-</script>
-</html>
+</script type="module">
+<section id="account-section">
+  <h2>Welcome to English Master!</h2>
+  <p>Create an account or log in to continue learning.</p>
 
+  <input id="email" type="email" placeholder="Your email address">
+  <input id="password" type="password" placeholder="Create a password (at least 6 characters)">
+
+  <button id="signup-btn">Create Account</button>
+  <button id="login-btn">Log In</button>
+  <button id="logout-btn" hidden>Log Out</button>
+
+  <p id="account-message" role="status"></p>
+console.log("English Master Firebase connected!");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const message = document.getElementById("account-message");
+
+  document.getElementById("signup-btn").addEventListener("click", async () => {
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        emailInput.value.trim(),
+        passwordInput.value
+      );
+
+      message.textContent = "Account created! Welcome to English Master.";
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+
+  document.getElementById("login-btn").addEventListener("click", async () => {
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        emailInput.value.trim(),
+        passwordInput.value
+      );
+
+      message.textContent = "You are logged in! Welcome back.";
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+
+  document.getElementById("logout-btn").addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      message.textContent = "You have logged out.";
+    } catch (error) {
+      message.textContent = error.message;
+    }
+  });
+
+  onAuthStateChanged(auth, (user) => {
+    document.getElementById("signup-btn").hidden = !!user;
+    document.getElementById("login-btn").hidden = !!user;
+    document.getElementById("logout-btn").hidden = !user;
+
+    if (user) {
+      message.textContent = "Logged in as " + (user.email || user.phoneNumber);
+    }
+  });
